@@ -6,7 +6,7 @@ function App() {
           <img width={40} height={40} src="/img/logo.png" />
           <div>
             <h3 className="text-uppercase">React sneakers </h3>
-            <p> Магазин лучших кросcовок</p>
+            <p className="opacity-5"> Магазин лучших кросcовок</p>
           </div>
         </div>
         <ul className="d-flex ">
@@ -21,8 +21,64 @@ function App() {
       </header>
 
       <div className="content p-40">
-        <h1>Все кроссовки</h1>
-        ....
+        <h1 className="mb-40">Все кроссовки</h1>
+        <div className="d-flex">
+          <div className="card">
+            <img width={133} height={112} src="/img/sneakers/sneak1.jpg" />
+            <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
+            <div className="d-flex justify-between align-center">
+              <div className="d-flex flex-column r">
+                <span>Цена:</span>
+                <b>12 999 р</b>
+              </div>
+              <button className="button">
+                <img width={11} height={11} src="/img/plus.svg" />
+              </button>
+            </div>
+          </div>
+
+          <div className="card">
+            <img width={133} height={112} src="/img/sneakers/sneak2.jpg" />
+            <h5>Мужские Кроссовки Nike Air Max 270</h5>
+            <div className="d-flex justify-between align-center">
+              <div className="d-flex flex-column r">
+                <span>Цена:</span>
+                <b>12 999 р</b>
+              </div>
+              <button className="button">
+                <img width={11} height={11} src="/img/plus.svg" />
+              </button>
+            </div>
+          </div>
+
+          <div className="card">
+            <img width={133} height={112} src="/img/sneakers/sneak3.jpg" />
+            <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
+            <div className="d-flex justify-between align-center">
+              <div className="d-flex flex-column r">
+                <span>Цена:</span>
+                <b>12 999 р</b>
+              </div>
+              <button className="button">
+                <img width={11} height={11} src="/img/plus.svg" />
+              </button>
+            </div>
+          </div>
+
+          <div className="card">
+            <img width={133} height={112} src="/img/sneakers/sneak4.jpg" />
+            <h5>Кроссовки Puma X Aka Boku Future Rider</h5>
+            <div className="d-flex justify-between align-center">
+              <div className="d-flex flex-column r">
+                <span>Цена:</span>
+                <b>12 999 р</b>
+              </div>
+              <button className="button">
+                <img width={11} height={11} src="/img/plus.svg" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
