@@ -1,36 +1,26 @@
+import React, { useState, useEffect } from "react";
 import Card from "./components/Card";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 
-const arr = [
-  {
-    title: "Мужские Кроссовки Nike Blazer Mid Suede",
-    price: 12999,
-    image: "/img/sneakers/sneak1.jpg",
-  },
-  {
-    title: "Мужские Кроссовки Nike Air Max 270",
-    price: 12999,
-    image: "/img/sneakers/sneak2.jpg",
-  },
-  {
-    title: "Мужские Кроссовки Nike Blazer Mid Suede",
-    price: 8499,
-    image: "/img/sneakers/sneak3.jpg",
-  },
-
-  {
-    title: "Кроссовки Puma X Aka Boku Future Rider",
-    price: 8999,
-    image: "/img/sneakers/sneak4.jpg",
-  },
-];
-
 function App() {
+  const [items, setItems] = useState([]);
+  const [cartOpened, setCartOpened] = useState(false);
+
+  useEffect(() => {
+    fetch("https://63468669745bd0dbd37fa232.mockapi.io/items")
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setItems(json);
+      });
+  }, []);
+
   return (
     <div className="wrapper clear">
-      <Drawer />
-      <Header />
+      {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
+      <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
         <div className="d-flex align-center mb-40 justify-between">
           <h1>Все кроссовки</h1>
@@ -39,9 +29,15 @@ function App() {
             <input placeholder="Поиск ..." className="search" />
           </div>
         </div>
-        <div className="d-flex">
-          {arr.map((obj) => (
-            <Card title={obj.title} price={obj.price} image={obj.image} />
+        <div className="d-flex flex-wrap">
+          {items.map((obj) => (
+            <Card
+              title={obj.title}
+              price={obj.price}
+              image={obj.image}
+              onPlus={() => console.log(123)}
+              onFavorite={() => console.log(123)}
+            />
           ))}
         </div>
       </div>
