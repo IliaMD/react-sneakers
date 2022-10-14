@@ -4,6 +4,7 @@ import axios from "axios";
 import Header from "./components/Header";
 import Drawer from "./components/Drawer";
 import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -23,6 +24,11 @@ function App() {
       .then((res) => {
         setCartItems(res.data);
       });
+    axios
+      .get("https://63468669745bd0dbd37fa232.mockapi.io/favorites")
+      .then((res) => {
+        setFavorites(res.data);
+      });
   }, []);
 
   const onAddtoCart = (obj) => {
@@ -30,9 +36,23 @@ function App() {
     setCartItems((prev) => [...prev, obj]);
   };
 
-  const onAddtoFavorite = (obj) => {
-    axios.post("https://63468669745bd0dbd37fa232.mockapi.io/favorites", obj);
-    setFavorites((prev) => [...prev, obj]);
+  const onAddtoFavorite = async (obj) => {
+    try {
+      if (favorites.find((favObj) => favObj.id === obj.id)) {
+        axios.delete(
+          `https://63468669745bd0dbd37fa232.mockapi.io/favorites/${obj.id}`
+        );
+        setFavorites((prev) => prev.filter((item) => item.id !== obj.id));
+      } else {
+        const { data } = await axios.post(
+          "https://63468669745bd0dbd37fa232.mockapi.io/favorites",
+          obj
+        );
+        setFavorites((prev) => [...prev, data]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onRemoveFromCart = (id) => {
@@ -67,6 +87,15 @@ function App() {
               onAddtoCart={onAddtoCart}
               onAddtoFavorite={onAddtoFavorite}
             />
+          }
+        />
+      </Routes>
+
+      <Routes>
+        <Route
+          path="/favorites"
+          element={
+            <Favorites items={favorites} onAddtoFavorite={onAddtoFavorite} />
           }
         />
       </Routes>
